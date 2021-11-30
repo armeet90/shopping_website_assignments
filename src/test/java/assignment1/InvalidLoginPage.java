@@ -34,14 +34,17 @@ public class InvalidLoginPage {
     }
 
     public void enterUsername(String username) {
+
         tbx_Username.sendKeys(username);
     }
 
     public void enterPassword(String password) {
+
         tbx_Password.sendKeys(password);
     }
 
     public void hitSubmit() {
+
         btn_Submit.click();
     }
 

@@ -1,4 +1,4 @@
-package assignment1;
+package assignments;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -11,7 +11,7 @@ import org.testng.annotations.Test;
 
 import java.util.concurrent.TimeUnit;
 
-public class Part1Test {
+public class Assignment1Test {
 
     WebDriver driver;
     String URL = "https://opensource-demo.orangehrmlive.com/index.php/auth/login";

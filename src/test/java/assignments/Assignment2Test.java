@@ -1,11 +1,11 @@
-package assignment1;
+package assignments;
 
 
 import common.BaseTest;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-public class Part2Test extends BaseTest {
+public class Assignment2Test extends BaseTest {
 
     @Test
     public void testLogin() {

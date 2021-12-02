@@ -11,7 +11,6 @@ public class BaseTest {
 
     public WebDriver driver;
 
-
     @BeforeMethod
     public void setup() throws Exception {
         System.setProperty("webdriver.chrome.driver", "C://chromedriver.exe");

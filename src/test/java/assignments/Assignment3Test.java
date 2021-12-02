@@ -1,7 +1,7 @@
 package assignments;
 
-import assignment3.Assignment3;
 import common.BaseTest;
+import common.Util;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
@@ -17,7 +17,7 @@ public class Assignment3Test extends BaseTest {
     public void Test3() {
         driver.get(Url);//launch on page 1 that is driver
         driver.findElement(By.xpath("//a[contains(text(), 'Generate Card Number')]")).click();// step 1 click on card generate number
-        WebDriver page2 = getLatestPage(driver);
+        WebDriver page2 = Util.getLatestPage(driver);
         String cardNumber = parseCardNumber(page2.findElement(By.xpath("//h4[contains(text(), 'Card Number')]")).getText());
         String cvv = parseCvv(page2.findElement(By.xpath("//h4[contains(text(), 'CVV')]")).getText());
         String expiryDate = page2.findElement(By.xpath("//h4[contains(text(), 'Exp')]")).getText();
@@ -29,13 +29,13 @@ public class Assignment3Test extends BaseTest {
         System.out.println(cardLimit);
 
         page2.findElement(By.xpath("//a[contains(text(),'Cart')]")).click();
-        WebDriver page3 = getLatestPage(page2);
+        WebDriver page3 = Util.getLatestPage(page2);
         WebElement selectElement = page3.findElement(By.xpath("//select[@name='quantity']"));
         Select select = new Select(selectElement);
         select.selectByIndex(3);
         page3.findElement(By.xpath("//input[@value = 'Buy Now']")).click();
 
-        WebDriver page4 = getLatestPage(page3);
+        WebDriver page4 = Util.getLatestPage(page3);
         page4.findElement(By.xpath("//input[@id = 'card_nmuber']")).sendKeys(cardNumber);
         WebElement expiryMonthSelectElement = page4.findElement(By.xpath("//select[@id = 'month']"));
         Select selectExpiryMonth = new Select(expiryMonthSelectElement);
@@ -52,14 +52,14 @@ public class Assignment3Test extends BaseTest {
         } catch (NoSuchElementException e) {
             Assert.fail("payment not successful");
         }
-        WebDriver page5 = getLatestPage(page4);
+        WebDriver page5 = Util.getLatestPage(page4);
 
         try {
             page5.findElement(By.xpath("//h2[contains(text(), 'Payment successfull')]"));
         } catch (NoSuchElementException e) {
             Assert.fail("Payment successful tag not found");
         }
-        WebDriver page6 = getLatestPage(page5);
+        WebDriver page6 =  Util.getLatestPage(page5);
         String ExpectedId = page6.findElement(By.xpath("//table[@class='alt access']/tbody/tr/td[2]")).getText();// xpath to fetch order id
 
         page5.findElement(By.xpath("//a[contains(text(),'Check Credit Card Limit')]")).click();
@@ -67,7 +67,7 @@ public class Assignment3Test extends BaseTest {
         page6.findElement(By.xpath("//input[@value = 'submit']")).click();
 
 
-        WebDriver page7 = getLatestPage(page6);
+        WebDriver page7 = Util.getLatestPage(page6);
         String balance = page7.findElement(By.xpath("//h4[contains(text(), 'Credit Card Balance')]/span")).getText();
         Assert.assertEquals(Double.parseDouble(cardLimit) - 80.0, Double.parseDouble(balance));
 
@@ -99,11 +99,5 @@ public class Assignment3Test extends BaseTest {
         return expDate.split("/")[1];
     }
 
-    WebDriver getLatestPage(WebDriver driver) {
-        WebDriver page = null;//
-        for (String wh : driver.getWindowHandles()) {
-            page = driver.switchTo().window(wh);// going to next page
-        }
-        return page;
-    }
+
 }
